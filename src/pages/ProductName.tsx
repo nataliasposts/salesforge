@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { useSequenceStore } from "../store/SequenceContext";
 import { FormProvider, useForm } from "react-hook-form";
 import type { NameFormValues } from "../features/types";
-import StepProgressBar from "../components/StepProgressBar";
+import StepProgressBar from "../components/StepProgressBar/StepProgressBar";
 
 const schema = yup.object({
   sequenceName: yup.string().required("Sequence name is required"),

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import StepDoneIcon from "./Icons/StepDoneIcon";
-import { StepPath } from "../features/enum";
+import StepDoneIcon from "../Icons/StepDoneIcon";
+import { StepPath } from "../../features/enum";
 
 const steps = [
   {
@@ -41,39 +41,35 @@ const StepProgressBar = () => {
           >
             {index < steps.length - 1 && (
               <div
-                className={`absolute top-3 left-1/2 w-full h-0.5 z-[-1] ${
-                  index < currentIndex ? "bg-purple-500" : "bg-gray-200"
-                }`}
+                className={`absolute top-3 left-1/2 w-full h-0.5 z-[-1] ${index < currentIndex ? "bg-purple-500" : "bg-gray-200"
+                  }`}
               />
             )}
 
             <div
-              className={`w-6 h-6 flex items-center justify-center border rounded-full mb-2 z-10 ${
-                isCompleted
-                  ? "bg-white border-purple-500 text-purple-500"
-                  : isActive
+              className={`w-6 h-6 flex items-center justify-center border rounded-full mb-2 z-10 ${isCompleted
+                ? "bg-white border-purple-500 text-purple-500"
+                : isActive
                   ? "bg-white border-purple-500 text-purple-500"
                   : "bg-white border-gray-300 text-gray-300"
-              }`}
+                }`}
             >
               {isCompleted ? (
-                <StepDoneIcon />
+                <StepDoneIcon data-testid="step-done-icon" />
               ) : (
                 <div className="w-2 h-2 rounded-full bg-current" />
               )}
             </div>
 
             <p
-              className={`text-[12px] font-medium text-center md:text-sm ${
-                isActive ? "text-purple-700" : "text-gray-900"
-              }`}
+              className={`text-[12px] font-medium text-center md:text-sm ${isActive ? "text-purple-700" : "text-gray-900"
+                }`}
             >
               {step.title}
             </p>
             <p
-              className={`hidden [@media(min-width:469px)]:block text-[12px] md:text-sm text-center ${
-                isActive ? "text-purple-700" : "text-gray-500"
-              }`}
+              className={`hidden [@media(min-width:469px)]:block text-[12px] md:text-sm text-center ${isActive ? "text-purple-700" : "text-gray-500"
+                }`}
             >
               {step.description}
             </p>

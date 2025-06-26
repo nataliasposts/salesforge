@@ -2,8 +2,9 @@ import { useFormContext, useFormState, Controller } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
 import type { Editor as EditorType } from "tinymce";
 import type { SequencePayload } from "../features/types";
-import Button from "./Button";
+import Button from "./Button/Button";
 import EmailIcon from "./Icons/EmailIcon";
+import { useState } from "react";
 
 interface EmailStepFormProps {
   stepTitle: string;
@@ -13,6 +14,7 @@ interface EmailStepFormProps {
 const EmailStepForm: React.FC<EmailStepFormProps> = ({ stepTitle, index }) => {
   const { register, control } = useFormContext<SequencePayload>();
   const { errors } = useFormState<SequencePayload>();
+  const [editorLoaded, setEditorLoaded] = useState(false);
 
   return (
     <div className="border border-gray-200 rounded-xl w-full mx-auto bg-white mb-4">
@@ -42,22 +44,29 @@ const EmailStepForm: React.FC<EmailStepFormProps> = ({ stepTitle, index }) => {
           name={`steps.${index}.body`}
           control={control}
           render={({ field }) => (
-            <Editor
-              apiKey="guvz0gmq7ywnek0u2zbc284tnjmpoyuy29nodwwmy57hl8iv"
-              value={field.value || ""}
-              onEditorChange={(content) => field.onChange(content)}
-              init={{
-                height: 231,
-                menubar: false,
-                plugins: "lists image code",
-                toolbar:
-                  "formatselect bold italic underline h1 h2 blockquote bullist numlist",
-                block_formats:
-                  "Paragraph=p; Heading 1=h1; Heading 2=h2; Quote=blockquote",
-                setup: (editor: EditorType) => {
-                  editor.on("init", () => {
-                    const styleTag = document.createElement("style");
-                    styleTag.innerHTML = `
+            <>
+              {!editorLoaded && (
+                <div className="text-gray-500 text-sm px-2 py-1">
+                  Loading editor...
+                </div>
+              )}
+              <Editor
+                onInit={() => setEditorLoaded(true)}
+                apiKey="guvz0gmq7ywnek0u2zbc284tnjmpoyuy29nodwwmy57hl8iv"
+                value={field.value || ""}
+                onEditorChange={(content) => field.onChange(content)}
+                init={{
+                  height: 231,
+                  menubar: false,
+                  plugins: "lists image code",
+                  toolbar:
+                    "formatselect bold italic underline h1 h2 blockquote bullist numlist",
+                  block_formats:
+                    "Paragraph=p; Heading 1=h1; Heading 2=h2; Quote=blockquote",
+                  setup: (editor: EditorType) => {
+                    editor.on("init", () => {
+                      const styleTag = document.createElement("style");
+                      styleTag.innerHTML = `
                       .tox-tinymce {
                         border: none !important;
                         box-shadow: none !important;
@@ -92,11 +101,12 @@ const EmailStepForm: React.FC<EmailStepFormProps> = ({ stepTitle, index }) => {
                         overflow-x: unset !important;
                       }
                     `;
-                    document.head.appendChild(styleTag);
-                  });
-                },
-              }}
-            />
+                      document.head.appendChild(styleTag);
+                    });
+                  },
+                }}
+              />
+            </>
           )}
         />
         {errors.steps?.[index]?.body && (

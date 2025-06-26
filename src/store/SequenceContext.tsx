@@ -55,3 +55,5 @@ export const useSequenceStore = (): SequenceContextType => {
   if (!context) throw new Error("SequenceContext is not available");
   return context;
 };
+
+export { SequenceContext };

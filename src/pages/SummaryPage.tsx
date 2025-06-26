@@ -8,7 +8,7 @@ import SeparatorIcon from "../components/Icons/SeparatorIcon";
 import TopPanel from "../components/TopPanel";
 import StepNavigation from "../components/StepNavigation";
 import { StepPath } from "../features/enum";
-import StepProgressBar from "../components/StepProgressBar";
+import StepProgressBar from "../components/StepProgressBar/StepProgressBar";
 
 export const SummaryPage = () => {
   const { sequence, reset, sequenceName } = useSequenceStore();
