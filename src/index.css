@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.btn {
+  @apply inline-flex items-center justify-center text-[12px] md:text-sm font-medium transition-colors rounded focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-offset-0;
+}
+
+.btn-primary {
+  @apply bg-purple-600 text-white hover:bg-purple-700 focus:ring-purple-600 px-4 py-2;
+}
+
+.btn-outline {
+  @apply h-[36px] px-[14px] py-[8px] border border-gray-300 text-gray-700 rounded-[8px] hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-300;
+}
+
+.container {
+  @apply max-w-[1549px] mx-auto px-[32px];
+}
+
+.error {
+  @apply text-red-500 text-xs mt-2;
+}
+
+section {
+  @apply w-full pt-[15px] pb-[25px];
+}
