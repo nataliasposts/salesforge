@@ -43,7 +43,7 @@ const EmailStepForm: React.FC<EmailStepFormProps> = ({ stepTitle, index }) => {
           control={control}
           render={({ field }) => (
             <Editor
-              apiKey="ff31gnzjvgs2blph1qut1y0upg3vdto03ijyve8zqz4jnd10"
+              apiKey="guvz0gmq7ywnek0u2zbc284tnjmpoyuy29nodwwmy57hl8iv"
               value={field.value || ""}
               onEditorChange={(content) => field.onChange(content)}
               init={{
